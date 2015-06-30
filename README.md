@@ -41,3 +41,28 @@ If you wish to copy the data and results from the virtual machine to your host m
 `cp -r myconnectome /vagrant/`
 
 This will place a copy of the results in the directory where the Vagrantfile is located on your host machine.
+
+## Setting up the virtual machine on aws
+
+First you need to create and start an instance (Russ add details here). You then need to make sure you have the [most up-to-date version of vagrant](https://www.vagrantup.com/downloads), and install vagrant-aws. If you do not, you will see this error (version 1.6.5)
+
+       vagrant-share can't be installed without vagrant login (RuntimeError)
+ 
+After updating:
+
+      vagrant --version
+      Vagrant 1.7.2
+
+Then you should install vagrant-aws, which will allow you to provision the Amazon machine.
+
+      sudo vagrant plugin install vagrant-aws
+      Installing the 'vagrant-aws' plugin. This can take a few minutes...
+      Installed the plugin 'vagrant-aws (0.6.0)'!
+
+You then need to add an aws compatible box. I found this box on the vagrant-aws plugin github repository:
+
+      vagrant box add aws https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box
+
+The vagrantfile included in this repo has instructions to provision the machine on Amazon using this box.
+
+
