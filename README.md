@@ -57,3 +57,27 @@ We learned a lot in the course of doing this project, and there are a number of 
 - Use a better file distribution system.  Currently the get_data function uses fixed lists of files to download from S3, because we didn't want to require each user to enter an AWS access key.  This is a rather brittle system.
 - Use Jupyter to expose working R notebooks
 - Use conda to manage all of the installation dependencies [http://continuum.io/blog/conda-data-science](http://continuum.io/blog/conda-data-science) rather than the current mixture of conda/pip/R
+
+
+## Setting up the virtual machine on aws
+
+First you need to create and start an instance (Russ add details here). You then need to make sure you have the [most up-to-date version of vagrant](https://www.vagrantup.com/downloads), and install vagrant-aws. If you do not, you will see this error (version 1.6.5)
+
+       vagrant-share can't be installed without vagrant login (RuntimeError)
+ 
+After updating:
+
+      vagrant --version
+      Vagrant 1.7.2
+
+Then you should install vagrant-aws, which will allow you to provision the Amazon machine.
+
+      sudo vagrant plugin install vagrant-aws
+      Installing the 'vagrant-aws' plugin. This can take a few minutes...
+      Installed the plugin 'vagrant-aws (0.6.0)'!
+
+You then need to add an aws compatible box. I found this box on the vagrant-aws plugin github repository:
+
+      vagrant box add aws https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box
+
+The vagrantfile included in this repo has instructions to provision the machine on Amazon using this box.
